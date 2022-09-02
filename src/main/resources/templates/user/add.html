@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Title</title>
+    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
 <body>
+
+<h1>ADD NEW USER</h1>
+
+<p th:text="${message} ?: ''" class="alert"></p>
+
+<form th:object="${user}" th:action="@{/user/}" id="user-form" role="form" method="post">
+    <div class="form-group">
+        <label for="username">
+            Username:
+            <input th:field="*{username}" type="text" name="username" id="username" class="form-control"/>
+        </label>
+
+        <label for="email">
+            Email:
+            <input th:field="*{email}" type="email" name="email" id="email" class="form-control"/>
+        </label>
+
+        <label for="password">
+            Password:
+            <input th:field="*{password}" type="password" name="password" id="password" class="form-control"/>
+        </label>
+
+        <label for="verify">
+            Confirm Password:
+            <input type="password" name="verify" id="verify" class="form-control"/>
+        </label>
+
+        <button type='submit' value="submit">Add New User</button>
+    </div>
+</form>
 
 </body>
 </html>

@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Title</title>
+    <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
 <body>
 
+<h1>Current Users</h1>
+<th:block th:if="${users.size() > 0}" th:remove="tag">
+    <table>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Date Joined</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="user : ${users}">
+            <tr>
+                <td>
+                    <a th:text="${user.username}" th:href="@{/user/detail/{id}(id=${user.id})}">...</a>
+                </td>
+                <td th:text="${user.email}">...</td>
+                <td th:text="${user.joined}">...</td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</th:block>
+
+<p th:if="${users.size() <= 0}">None found.</p>
+
+<p>
+    <a th:href="@{/user/add}">Add a new user</a>
+</p>
 </body>
 </html>
